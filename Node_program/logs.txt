@@ -1,0 +1,2 @@
+Request received for: /
+Request received for: /favicon.ico
