@@ -13,5 +13,11 @@
     "username": "Aastha Chauhan",
     "email": "het@gmail.com",
     "password": "12345"
+  },
+  {
+    "username": "Dev",
+    "email": "dev@gmail.com",
+    "password": "1810",
+    "gender": "on"
   }
 ]

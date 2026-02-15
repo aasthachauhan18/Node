@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const multer = require('multer');
 const app = express();
 const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3000
@@ -9,6 +8,8 @@ const PORT = process.env.PORT || 3000
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static('public'));
+
 
 
 const USERS_FILE = path.join(__dirname, 'users.json');
@@ -41,7 +42,7 @@ app.get('/register' , (req,res) => {
 app.post('/register', (req, res) => {
     console.log(req.body);
     
-    const { username, email, password ,male,female } = req.body;
+    const { username, email, password ,gender } = req.body;
 
     let users = readUsers();
 
@@ -51,7 +52,7 @@ app.post('/register', (req, res) => {
         return res.send('User already registered!');
     }
 
-    users.push({ username, email, password,male,female });
+    users.push({ username, email, password,gender });
     writeUsers(users);
 
     res.cookie("users",email)
