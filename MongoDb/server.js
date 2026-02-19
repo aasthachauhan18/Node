@@ -1,16 +1,26 @@
-const express = require('express');
-const connection = require('./db');
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import morgan from "morgan";
+import connectDB from "./config/db.js";
+
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+
+dotenv.config();
+connectDB();
 
 const app = express();
 
-connection();
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
+app.use(morgan("dev"));
 
-app.get('/',(req,res) =>{
-    res.send(`Server starts`);
-});
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
-app.listen(5000,()=>{
-    console.log("Server starts at 5000");
-    
-})
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT}`)
+);
