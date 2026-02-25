@@ -9,7 +9,7 @@ export const register = async (req, res) => {
   const { name, email, password } = req.body;
 
   console.log("before find by id ");
-  const userData = await User.findOne({ _id: '6996f6b19bd33e7787958b57' }); // Use await
+  const userData = await User.findOne({ _id}); 
   console.log("after find by id ");
   console.log(userData);
   
